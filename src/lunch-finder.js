@@ -146,7 +146,6 @@ function fetchAllRestaurantsRecursive(offset, list, callback) {
             'user-key' : API_KEY_ZOMATO,
         },
     };
-    console.log('REQUEST: ', offset);
     request(options, function (error, response, body) {
         if (error || response.statusCode !== 200) {
             msg.send('The internet is broken');
