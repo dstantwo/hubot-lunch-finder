@@ -101,7 +101,7 @@ function getRandomDelivery() {
  */
 function getRandomRestaurant() {
     return new Promise(function (fulfill, reject) {
-        fetchAllRestaurantsRecursive(0, null, (restaurantList) => {
+        fetchAllRestaurantsRecursive(null, null, (restaurantList) => {
             let filteredRestaurantList = filterRestaurantsForDistance(restaurantList);
             let randomIndex = Math.floor(Math.random() * (filteredRestaurantList.length - 1));
             let restaurant = filteredRestaurantList[randomIndex];
@@ -135,8 +135,8 @@ function filterRestaurantsForDistance(restaurants) {
  * Recursive function that gets all restaurants from Zomato's paginated api
  *
  * @async
- * @param {Number} offset the start index to use for paginated api
- * @param {Array} list list of restaurants already fetched (can be null on first call)
+ * @param {Number} offset the start index to use for paginated api (should be null on first call)
+ * @param {Array} list list of restaurants already fetched (should be null on first call)
  * @param {Function} callback retrieves Array of restaurants when recursion is done
  */
 function fetchAllRestaurantsRecursive(offset, list, callback) {
@@ -146,6 +146,7 @@ function fetchAllRestaurantsRecursive(offset, list, callback) {
             'user-key' : API_KEY_ZOMATO,
         },
     };
+    console.log('REQUEST: ', offset);
     request(options, function (error, response, body) {
         if (error || response.statusCode !== 200) {
             msg.send('The internet is broken');
@@ -154,7 +155,8 @@ function fetchAllRestaurantsRecursive(offset, list, callback) {
             let responseBody = JSON.parse(body);
             let newOffset = responseBody.results_start + responseBody.results_shown;
             let newList = list ? list.concat(responseBody.restaurants) : responseBody.restaurants;
-            if (responseBody.results_start + responseBody.results_shown < responseBody.results_found) {
+            // checking if newOffset is 0 accounts for strange Zomato api behavior that caused infinite loop
+            if (responseBody.results_start + responseBody.results_shown < responseBody.results_found && newOffset !== 0) {
                 fetchAllRestaurantsRecursive(newOffset, newList, callback);
             } else {
                 callback(newList);
