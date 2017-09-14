@@ -7,10 +7,10 @@
   "keywords": "hubot, hubot-scripts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-lunch-finder.git"
+    "url": "git://github.com/dstantwo/hubot-lunch-finder.git"
   },
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-lunch-finder/issues"
+    "url": "https://github.com/dstantwo/hubot-lunch-finder/issues"
   },
   "dependencies": {
     "geolib": "^2.0.23",
