@@ -1,7 +1,7 @@
 {
   "name": "hubot-lunch-finder",
   "description": "A hubot script that siggests where to get lunch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "David Stanley <dmstanley2@gmail.com>",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts",
