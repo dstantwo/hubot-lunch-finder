@@ -2,7 +2,7 @@
 
 A hubot script that suggests where to get lunch
 
-See [`src/lunch-finder.coffee`](src/lunch-finder.coffee) for full documentation.
+See [`src/lunch-finder.js`](src/lunch-finder.js) for full documentation.
 
 ## Installation
 
